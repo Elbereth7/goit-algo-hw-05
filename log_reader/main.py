@@ -1,35 +1,23 @@
 import sys
 from pathlib import Path
+import data_handler as dh
+from file_handler import load_logs
 
 def main():
 # Скрипт повинен приймати шлях до файлу логів як аргумент командного рядка.
 # python [main.py](<http://main.py/>) /path/to/logfile.log
+# Скрипт має зчитувати і аналізувати лог-файл, підраховуючи кількість записів для кожного рівня логування (INFO, ERROR, DEBUG, WARNING).
     if len(sys.argv) > 1:
         path = Path(sys.argv[1])
-        print(path, type(path), sep='\t')
-# Скрипт має зчитувати і аналізувати лог-файл, підраховуючи кількість записів для кожного рівня логування (INFO, ERROR, DEBUG, WARNING).
-# Рівень логування | Кількість
-# -----------------|----------
-# INFO             | 4
-# DEBUG            | 3
-# ERROR            | 2
-# WARNING          | 1
+        dh.display_log_counts(dh.count_logs_by_level(load_logs(path)))
+        # Скрипт повинен приймати не обов'язковий аргумент командного рядка, 
+        # після аргументу шляху до файлу логів. Він відповідає за виведення всіх записи певного рівня логування. 
+        # І приймає значення відповідно до рівня логування файлу. Наприклад аргумент error виведе всі записи рівня ERROR з файлу логів.
+        # python main.py path/to/logfile.log error
+        if len(sys.argv) > 2:
+            level = sys.argv[2].upper()
+            dh.display_filtered_logs(dh.filter_logs_by_level(load_logs(path), level), level)
 
-
-# Скрипт повинен приймати не обов'язковий аргумент командного рядка, 
-# після аргументу шляху до файлу логів. Він відповідає за виведення всіх записи певного рівня логування. 
-# І приймає значення відповідно до рівня логування файлу. Наприклад аргумент error виведе всі записи рівня ERROR з файлу логів.
-# python main.py path/to/logfile.log error
-# Рівень логування | Кількість
-# -----------------|----------
-# INFO             | 4
-# DEBUG            | 3
-# ERROR            | 2
-# WARNING          | 1
-
-# Деталі логів для рівня 'ERROR':
-# 2024-01-22 09:00:45 - Database connection failed.
-# 2024-01-22 11:30:15 - Backup process failed.
 
 # При розробці обов'язково було використано один з елементів функціонального програмування: лямбда-функція, списковий вираз, функція filter, тощо.
 
