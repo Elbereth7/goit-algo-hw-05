@@ -4,9 +4,10 @@ def filter_logs_by_level(logs: list, level: str) -> list:
 # Фільтрацію за рівнем логування виконує функція filter_logs_by_level(logs: list, level: str) -> list. 
 # Вона дозволить вам отримати всі записи логу для певного рівня логування.
     logs_by_level = []
-    for log in logs:
-        if log['level'] == level:
-            logs_by_level.append(log)
+    if logs:
+        for log in logs:
+            if log['level'] == level:
+                logs_by_level.append(log)
     return logs_by_level
 
 def count_logs_by_level(logs: list) -> dict:
@@ -25,11 +26,12 @@ def count_logs_by_level(logs: list) -> dict:
     # function to check the length of a filtered logs
     level_count = {}
     level_set = set()
-    for log in logs: 
-        level_set.add(log['level'])
-        for level in level_set:
-            qty = len(filter_logs_by_level(logs, level))
-            level_count[level] = qty
+    if logs:
+        for log in logs: 
+            level_set.add(log['level'])
+            for level in level_set:
+                qty = len(filter_logs_by_level(logs, level))
+                level_count[level] = qty
     return level_count
 
 def display_log_counts(counts: dict):
