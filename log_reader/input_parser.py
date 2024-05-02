@@ -1,7 +1,7 @@
+from collections import defaultdict
+
 def parse_log_line(line: str) -> dict:
-# Парсинг рядка логу виконує функцію parse_log_line(line: str) -> dict, 
-# яка приймає рядок з логу як вхідний параметр і повертає словник з розібраними компонентами: 
-# дата, час, рівень, повідомлення. Використовуйте методи рядків, такі як split(), для розділення рядка на частини.
+# Parsing the log file line returning a dictionary with 'date', 'time', 'level' and 'message' keys
     logs = {}
     
     log_list = line.strip().split()
