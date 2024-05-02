@@ -17,8 +17,6 @@ def main():
         print('No argument entered. Please enter a log file path as an argument')
 
 
-# При розробці обов'язково було використано один з елементів функціонального програмування: лямбда-функція, списковий вираз, функція filter, тощо.
-
 if __name__ == '__main__':
     main()
 

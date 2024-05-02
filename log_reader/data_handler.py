@@ -2,9 +2,9 @@ from file_handler import load_logs
 from collections import Counter
 
 def filter_logs_by_level(logs: list, level: str) -> list:
-# Using list comprehensions to create a list with all logs filtered by level.
+# Using filter() and lambda to create a list with all logs filtered by level.
     if logs:
-        logs_by_level = [log for log in logs if log['level'] == level]
+        logs_by_level = list(filter(lambda log: log['level'] == level, logs))
         return logs_by_level
 
 def count_logs_by_level(logs: list) -> dict:
@@ -27,6 +27,7 @@ def display_log_counts(counts: dict):
             print(f'{level:<{first_column_length}}| {counts[level]:<{second_column_length-1}}')
 
 def display_filtered_logs(logs: list, level: str):
+# Function accepts the logs list and required level information and returns logs for the requested level in a readable format.
     if logs:
         print(f"\nДеталі логів для рівня '{logs[0]['level']}':")
         for log in logs:

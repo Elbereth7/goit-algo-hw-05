@@ -1,6 +1,7 @@
 from file_handler import write_to_file
 from functools import wraps
 
+# Decorator to add a logic for Exceptions which can appear in data handling functions
 def input_error(func):
     @wraps(func)
     def inner(*args, **kwargs):

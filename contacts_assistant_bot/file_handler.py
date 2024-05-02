@@ -3,6 +3,7 @@ from functools import wraps
 
 file_path = Path('contacts_assistant_bot/contacts.txt')
 
+# Decorator to add a logic for Exceptions which can appear while reading the file (file does not exist)
 def file_error(func):
     @wraps(func)
     def inner(*args, **kwargs):

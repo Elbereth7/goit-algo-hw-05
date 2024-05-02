@@ -1,14 +1,14 @@
 import re
-from typing import Callable
+from typing import Callable, Generator
 
-def generator_numbers(text: str):
+def generator_numbers(text: str) -> Generator[str, None, None]:
 # Finding all the real numbers in string and returning them as generator
     pattern = r"\d+\.*\d*" # Using regex to identify all real numbers in string - both decimals and integers.
     numbers = re.findall(pattern, text)
     for number in numbers:
         yield number # Returning generator
 
-def sum_profit(text: str, func: Callable) -> float:
+def sum_profit(text: str, func: Callable[[str], Generator[str, None, None]]) -> float:
 # Counting sum of all numbers returned by a numbers generator
     sum = 0
     for number in func(text):
